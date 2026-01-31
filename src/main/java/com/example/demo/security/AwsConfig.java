@@ -7,6 +7,7 @@ import software.amazon.awssdk.auth.credentials.ProfileCredentialsProvider;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.kms.KmsClient;
 import software.amazon.awssdk.services.s3.S3Client;
+import software.amazon.awssdk.services.ssm.SsmClient;
 
 @Configuration
 public class AwsConfig {
@@ -28,4 +29,13 @@ public class AwsConfig {
                         ProfileCredentialsProvider.create("springboot-dev"))
                 .build();
     }
+    
+    @Bean
+    public SsmClient ssmClient() {
+        return SsmClient.builder()
+                .region(Region.US_EAST_1)
+                .credentialsProvider(ProfileCredentialsProvider.create("springboot-dev"))
+                .build();
+    }
+
 }
