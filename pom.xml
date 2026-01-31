@@ -35,11 +35,49 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
-
-    <!-- DynamoDB -->
+    
     <dependency>
-        <groupId>io.awspring.cloud</groupId>
-        <artifactId>spring-cloud-aws-starter-dynamodb</artifactId>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-security</artifactId>
+</dependency>
+<!-- JWT (JWS) -->
+<dependency>
+    <groupId>io.jsonwebtoken</groupId>
+    <artifactId>jjwt-api</artifactId>
+    <version>0.11.5</version>
+</dependency>
+<dependency>
+    <groupId>io.jsonwebtoken</groupId>
+    <artifactId>jjwt-impl</artifactId>
+    <version>0.11.5</version>
+    <scope>runtime</scope>
+</dependency>
+
+<dependency>
+    <groupId>io.jsonwebtoken</groupId>
+    <artifactId>jjwt-jackson</artifactId>
+    <version>0.11.5</version>
+    <scope>runtime</scope>
+</dependency>
+
+    <dependency>
+        <groupId>software.amazon.awssdk</groupId>
+        <artifactId>kms</artifactId>
+    </dependency>
+<dependency>
+    <groupId>io.awspring.cloud</groupId>
+    <artifactId>spring-cloud-aws-starter-dynamodb</artifactId>
+</dependency>
+
+
+    <dependency>
+        <groupId>software.amazon.awssdk</groupId>
+        <artifactId>auth</artifactId>
+    </dependency>
+
+    <dependency>
+        <groupId>software.amazon.awssdk</groupId>
+        <artifactId>s3</artifactId>
     </dependency>
 
     <!-- Actuator -->
@@ -59,18 +97,21 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-
-<dependencyManagement>
+	
+	<dependencyManagement>
     <dependencies>
         <dependency>
             <groupId>io.awspring.cloud</groupId>
             <artifactId>spring-cloud-aws-dependencies</artifactId>
-            <version>3.0.2</version>
+            <version>3.2.1</version>
             <type>pom</type>
             <scope>import</scope>
         </dependency>
     </dependencies>
-	</dependencyManagement>
+</dependencyManagement>
+
+
+
 	
 	<build>
 		<plugins>
