@@ -14,8 +14,10 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.extern.slf4j.Slf4j;
 
 @Component
+@Slf4j
 public class JwtAuthFilter extends OncePerRequestFilter {
 
 	private final JwtUtil jwtUtil;
@@ -56,6 +58,10 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                 );
 
         auth.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+        log.info("PATH: {}", request.getRequestURI());
+        log.info("AUTH HEADER: {}", request.getHeader("Authorization"));
+        log.info("USERNAME FROM TOKEN: {}", username);
+        log.info("AUTH SET: {}", SecurityContextHolder.getContext().getAuthentication());
 
         SecurityContextHolder.getContext().setAuthentication(auth);
 
