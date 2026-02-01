@@ -33,11 +33,12 @@ public class JwtUtil {
                 .setExpiration(new Date(System.currentTimeMillis() + 3600000))
                 .signWith(Keys.hmacShaKeyFor(key), SignatureAlgorithm.HS256)
                 .compact();
+        
     }
 
     public String validateToken(String token) {
         return Jwts.parserBuilder()
-                .setSigningKey(key)
+                .setSigningKey(Keys.hmacShaKeyFor(key))
                 .build()
                 .parseClaimsJws(token)
                 .getBody()
