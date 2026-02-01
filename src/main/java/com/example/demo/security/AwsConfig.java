@@ -13,29 +13,23 @@ import software.amazon.awssdk.services.ssm.SsmClient;
 public class AwsConfig {
 
     @Bean
-    public KmsClient kmsClient() {
+    KmsClient kmsClient() {
         return KmsClient.builder()
                 .region(Region.US_EAST_1)
-                .credentialsProvider(
-                        ProfileCredentialsProvider.create("springboot-dev"))
                 .build();
     }
 
     @Bean
-    public S3Client s3Client() {
+    S3Client s3Client() {
         return S3Client.builder()
                 .region(Region.US_EAST_1)
-                .credentialsProvider(
-                        ProfileCredentialsProvider.create("springboot-dev"))
                 .build();
     }
     
     @Bean
-    public SsmClient ssmClient() {
+    SsmClient ssmClient() {
         return SsmClient.builder()
                 .region(Region.US_EAST_1)
-                .credentialsProvider(ProfileCredentialsProvider.create("springboot-dev"))
                 .build();
     }
-
 }
