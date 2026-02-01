@@ -48,22 +48,20 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     String token = header.substring(7);
 
     try {
-        String username = jwtUtil.validateToken(token);
+    	String username = jwtUtil.validateToken(token);
 
-        UsernamePasswordAuthenticationToken auth =
-                new UsernamePasswordAuthenticationToken(
-                        username,
-                        null,
-                        List.of(new SimpleGrantedAuthority("ROLE_USER"))
-                );
+    	UsernamePasswordAuthenticationToken auth =
+    	        UsernamePasswordAuthenticationToken.authenticated(
+    	                username,
+    	                null,
+    	                List.of(new SimpleGrantedAuthority("ROLE_USER"))
+    	        );
 
-        auth.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-        log.info("PATH: {}", request.getRequestURI());
-        log.info("AUTH HEADER: {}", request.getHeader("Authorization"));
-        log.info("USERNAME FROM TOKEN: {}", username);
-        log.info("AUTH SET: {}", SecurityContextHolder.getContext().getAuthentication());
+    	auth.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
-        SecurityContextHolder.getContext().setAuthentication(auth);
+    	SecurityContextHolder.getContext().setAuthentication(auth);
+
+    	log.info("AUTH SET AFTER: {}", SecurityContextHolder.getContext().getAuthentication());
 
     } catch (Exception e) {
         // ignore
